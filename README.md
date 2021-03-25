@@ -8,8 +8,3 @@
 `flutter run  -d android -t lib/main_dev.dart`  
 `flutter run -d android -t lib/main_dev.dart --flavor=dev`  
 `flutter run web -t lib/main_dev.dart`
-
-# 缺
-api
-model
-provider

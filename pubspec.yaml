@@ -59,8 +59,12 @@ dependencies:
 
   # 生成模型的工具1
   json_annotation: ^3.1.1
+  # 模型
+  retrofit: any # ALL
+
   # 状态管理
-  provider: ^4.3.3
+  provider: ^4.3.3 # ALL
+  
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -69,6 +73,10 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  # 模型工具
+  retrofit_generator: any
+  json_serializable: any
+  build_runner: any
   # icon # ANDROID IOS LINUX MACOS WINDOWS
   flutter_launcher_icons: "^0.8.0" # flutter pub run flutter_launcher_icons:main
   # name # ANDROID IOS LINUX MACOS WINDOWS

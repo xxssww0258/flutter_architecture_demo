@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_architecture_demo/utils/application.dart';
+import 'package:provider/provider.dart';
 
+import '../../my_app.dart';
 class HomeIndexPage extends StatefulWidget {
   @override
   _HomeIndexPageState createState() => _HomeIndexPageState();
@@ -8,13 +10,20 @@ class HomeIndexPage extends StatefulWidget {
 
 class _HomeIndexPageState extends State<HomeIndexPage> {
   var $S = Application.$S;
+  var client = Application.client;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body:Center(
-          child:Text($S.hello_world)
+          child:Column(
+            children: [
+              Text($S.hello_world),
+              ElevatedButton(onPressed: (){
+              }, child: Text('button'),)
+            ],
+          )
         )
       )
     );

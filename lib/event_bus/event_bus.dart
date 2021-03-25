@@ -1,4 +1,6 @@
 //订阅者回调签名
+import 'event_bus_init.dart';
+
 typedef void EventCallback(dynamic arg);
 
 class EventBus {
@@ -10,15 +12,15 @@ class EventBus {
   var _emap = new Map<Object, List<EventCallback>>();
 
   //添加订阅者
-  void on(eventName, EventCallback f) {
+  void on(EventBusNames eventName, EventCallback f) {
     if (eventName == null || f == null) return;
     // _emap[eventName] ??= new List<EventCallback>();
-    _emap[eventName] ??= [] as List<EventCallback>;
+    _emap[eventName] ??= [];
     _emap[eventName].add(f);
   }
 
   //移除订阅者
-  void off(eventName, [EventCallback f]) {
+  void off(EventBusNames eventName, [EventCallback f]) {
     var list = _emap[eventName];
     if (eventName == null || list == null) return;
     if (f == null) {
@@ -29,7 +31,7 @@ class EventBus {
   }
 
   //触发事件，事件触发后该事件所有订阅者会被调用
-  void emit(eventName, [arg]) {
+  void emit(EventBusNames eventName, [arg]) {
     var list = _emap[eventName];
     if (list == null) return;
     int len = list.length - 1;

@@ -41,11 +41,14 @@ class _GlobalLayoutState extends State<GlobalLayout> {
   Widget build(BuildContext context) {
     return Scaffold(
       body:widget.child,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: RunPlatform.isProduction || RunPlatform.isWeb
         ? null
         : FloatingActionButton(onPressed: (){
-          Application.alice?.showInspector();
-        })
+            Application.alice?.showInspector();
+          },  
+          child: Text('debug')
+        )
     );
   }
 }

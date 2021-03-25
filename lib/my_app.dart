@@ -3,9 +3,11 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/screenutil_init.dart';
+import 'package:provider/provider.dart';
 
 import 'config.dart';
 import 'generated/l10n.dart';
+import 'provider/user_provider.dart';
 import 'router/my_router.dart';
 import 'router/route_name.dart';
 import 'utils/application.dart';
@@ -23,23 +25,28 @@ class MyApp extends StatelessWidget {
         allowFontScaling: false,
         // 状态管理
         builder:(){
-          return MaterialApp(
-            title: Application.packageInfo?.appName ?? SHOW_APP_NAME,
-            builder: (BuildContext context, Widget child) => botToastBuilder(context,GlobalLayout(context, child)),
-            navigatorObservers:[BotToastNavigatorObserver()],
-            // http调试
-            navigatorKey: Application.aliceKey,
-            // 路由配置
-            initialRoute: RouteName.HomeIndexPage,
-            onGenerateRoute: MyRouter.generateRoute,
-            localizationsDelegates: [
-              GlobalWidgetsLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-
-              S.delegate,// flutter intl生成的
+          return MultiProvider(
+            providers: [
+              Provider<UserInfoProvider>(create: (_) => UserInfoProvider())
             ],
-            supportedLocales: S.delegate.supportedLocales,// mark
+            child: MaterialApp(
+              title: Application.packageInfo?.appName ?? SHOW_APP_NAME,
+              builder: (BuildContext context, Widget child) => botToastBuilder(context,GlobalLayout(context, child)),
+              navigatorObservers:[BotToastNavigatorObserver()],
+              // http调试
+              navigatorKey: Application.aliceKey,
+              // 路由配置
+              initialRoute: RouteName.HomeIndexPage,
+              onGenerateRoute: MyRouter.generateRoute,
+              localizationsDelegates: [
+                GlobalWidgetsLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+
+                S.delegate,// flutter intl生成的
+              ],
+              supportedLocales: S.delegate.supportedLocales,// mark
+            ),
           );
         }
       );
