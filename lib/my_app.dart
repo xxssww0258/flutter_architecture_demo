@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import 'config.dart';
 import 'generated/l10n.dart';
+import 'provider/app_color_provider.dart';
 import 'provider/user_provider.dart';
 import 'router/my_router.dart';
 import 'router/route_name.dart';
@@ -27,9 +28,11 @@ class MyApp extends StatelessWidget {
         builder:(){
           return MultiProvider(
             providers: [
-              Provider<UserInfoProvider>(create: (_) => UserInfoProvider())
+              Provider<UserInfoProvider>(create: (_) => UserInfoProvider()),
             ],
             child: MaterialApp(
+              theme: AppColorProvider.getTheme(context), // 
+              themeMode: ThemeMode.light, // 系统主题 是 亮色 还是 暗色
               title: Application.packageInfo?.appName ?? SHOW_APP_NAME,
               builder: (BuildContext context, Widget child) => botToastBuilder(context,GlobalLayout(context, child)),
               navigatorObservers:[BotToastNavigatorObserver()],
