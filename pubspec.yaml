@@ -39,6 +39,8 @@ dependencies:
   path_provider: ^1.6.27 # ANDROID IOS LINUX MACOS WINDOWS
   # 权限 #特殊配置
   permission_handler: ^5.1.0+2 # ANDROID IOS
+  # app唤醒
+  uni_links: ^0.4.0 # ANDROID IOS
 
   # toast
   bot_toast: ^3.0.5 # ALL
@@ -64,7 +66,6 @@ dependencies:
 
   # 状态管理
   provider: ^4.3.3 # ALL
-  
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

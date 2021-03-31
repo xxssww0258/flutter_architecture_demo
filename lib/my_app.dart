@@ -28,28 +28,33 @@ class MyApp extends StatelessWidget {
         builder:(){
           return MultiProvider(
             providers: [
-              Provider<UserInfoProvider>(create: (_) => UserInfoProvider()),
+              ChangeNotifierProvider<UserInfoProvider>.value(value:UserInfoProvider()),
+              ChangeNotifierProvider<AppColorProvider>.value(value:AppColorProvider()),
+              // Provider<UserInfoProvider>(create: (_) => UserInfoProvider()),
+              // Provider<AppColorProvider>(create: (_) => AppColorProvider()),
             ],
-            child: MaterialApp(
-              theme: AppColorProvider.getTheme(context), // 
-              themeMode: ThemeMode.light, // 系统主题 是 亮色 还是 暗色
-              title: Application.packageInfo?.appName ?? SHOW_APP_NAME,
-              builder: (BuildContext context, Widget child) => botToastBuilder(context,GlobalLayout(context, child)),
-              navigatorObservers:[BotToastNavigatorObserver()],
-              // http调试
-              navigatorKey: Application.aliceKey,
-              // 路由配置
-              initialRoute: RouteName.HomeIndexPage,
-              onGenerateRoute: MyRouter.generateRoute,
-              localizationsDelegates: [
-                GlobalWidgetsLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
+            builder:(context, child){ // 这个child是上面 Provider  的其中一个参数 目前没有使用
+              return MaterialApp(
+                theme: AppColorProvider.getThemeData(context),
+                themeMode: ThemeMode.light, // 系统主题 是 亮色 还是 暗色
+                title: Application.packageInfo?.appName ?? SHOW_APP_NAME,
+                builder: (BuildContext context, Widget child) => botToastBuilder(context,GlobalLayout(context, child)),
+                navigatorObservers:[BotToastNavigatorObserver()],
+                // http调试
+                navigatorKey: Application.aliceKey,
+                // 路由配置
+                initialRoute: RouteName.HomeIndexPage,
+                onGenerateRoute: MyRouter.generateRoute,
+                localizationsDelegates: [
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
 
-                S.delegate,// flutter intl生成的
-              ],
-              supportedLocales: S.delegate.supportedLocales,// mark
-            ),
+                  S.delegate,// flutter intl生成的
+                ],
+                supportedLocales: S.delegate.supportedLocales,// mark
+              );
+            }
           );
         }
       );

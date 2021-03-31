@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:uni_links/uni_links.dart';
+import 'package:flutter/services.dart' show PlatformException;
 // import 'package:flutter_architecture_demo/utils/upgrade.dart';
 
 import '../generated/l10n.dart';
@@ -23,7 +24,7 @@ class _GlobalLayoutState extends State<GlobalLayout> {
     // 初始化环境分2个地方 一个是不需要context的MyApp 另一个是需要context的GLobalLayout
     DioInit.setLang(widget.context); // Head国际化设置
     Application.$S = S.of(widget.context);
-    
+    initUniLinks();
     initData(widget.context)
       .then((value){
         // TODO: 检查更新
@@ -35,6 +36,15 @@ class _GlobalLayoutState extends State<GlobalLayout> {
     return Future.wait([
 
     ]);
+  }
+  // 监听 url唤醒 跳转到指定路由
+  Future<Null> initUniLinks()async{
+    try{
+      Uri initialLink = await getInitialUri();
+      print(initialLink);
+    } on PlatformException {
+      print('platfrom exception unilink');
+    }
   }
 
   @override
